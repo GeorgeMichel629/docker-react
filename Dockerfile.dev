@@ -1,0 +1,19 @@
+FROM node:latest
+
+# Create the app directory
+WORKDIR /app
+
+# Install app dependencies
+COPY package*.json ./
+RUN npm install
+
+# Change ownership and permissions
+RUN chown -R node:node /app
+RUN chmod -R 755 /app
+
+# Bundle app source
+COPY . .
+
+# Expose port and start application
+EXPOSE 3000
+CMD ["npm", "start"]
